@@ -11,3 +11,43 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.headerBar{
+  margin: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid black;
+} 
+.logo-container img{
+  width: 100px;
+  height: 100px;
+  padding-left: 10px;
+  cursor: pointer;
+}
+
+.nav-items ul{
+  display: flex;
+  list-style-type: none;
+  cursor: pointer;
+}
+
+.nav-items > ul >li{
+  margin: 10px;
+  padding: 10px;
+} 
+.body{
+  margin: 10px 60px;
+}
+.res-card{
+  width: 254px;
+  height: 310;
+}
+
+.res-card > img{
+  width: 254px;
+  height: 160px;
+}
+.restro-title{
+  color: #;
+}

@@ -1,0 +1,2 @@
+export const logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS48ywWIEdy-eUKWdd04vG0dPfmErQR6p6_3NrUIaVSTXvBOmllyZd7y-bGV_SO4qM_gYM&usqp=CAU"
+export const restro_img="https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill/"
