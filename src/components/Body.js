@@ -18,17 +18,29 @@ export default function Body(){
         
     }
 
-    function handleSearch(){
+    function handleSearch(e){
+        e.preventDefault();
+        console.log();
+        const search_value=e.target.value.toLowerCase();
+        const search_filter_restrodata=restroData.filter(
+            (data)=>data.data.name.toLowerCase().includes(search_value));
+        search_filter_restrodata? setRestro_data(search_filter_restrodata) : setRestro_data(restroData)
+        
 
     }
 
     return(
         <div className="body-container">
-            <button className="toprated-btn" onClick={handleTopRated}>
-                {isTopRated?"Show all Restaurants" : "Top Rated Restaurants"}
-            </button>
-            <div className="search">
-                <input type="text" onChange={handleSearch}/>
+            <div className="filters">
+                <div className="toprated-btn-container">
+                    <button className="toprated-btn" onClick={handleTopRated}>
+                        {isTopRated?"Show all Restaurants" : "Top Rated Restaurants"}
+                    </button>
+                </div>
+                <div className="search">
+                    <input type="text" name="text" onChange={handleSearch}/>
+                    <button className="search-btn">Search</button>
+                </div>
             </div>
             <div className="res-container">  
                 {card}
