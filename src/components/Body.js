@@ -1,13 +1,12 @@
 import RestroCards from "./RestroCard"
-// import { restro_data } from "../utils/restro_data"
 import { useEffect, useState } from "react"
-import { json } from "react-router-dom"
 import Shimmer from "./shimmer"
 export default function Body(){
-    const [restroData,setRestro_data]=useState([])
+    const [allRestaurantsData,setAllRestaurantsData]=useState([])
+    const [filteredRestaurants, setFilteredRestaurants ]=useState([])
     const [isTopRated,setIsTopRated]=useState(true)
-    const card=restroData?.map((data)=><RestroCards key={data.data.id} value={data} />)
-   console.log(restroData,"restro");
+    const card=filteredRestaurants?.map((data)=><RestroCards key={data.data.id} value={data} />)
+    // console.log(restroData,"restro");
 
     useEffect(()=>{
         getRestaurants()
@@ -20,38 +19,39 @@ export default function Body(){
         const json= await data.json();
         // console.log(json);
         const json_data=json?.data?.cards[2]?.data?.data?.cards
-        setRestro_data(json_data)
+        setAllRestaurantsData(json_data)
+        setFilteredRestaurants(json_data)
     }   
 
     function handleTopRated(){
-        const topRated_data=restroData.filter((res)=>
-            res.data.avgRating>4.2
+        const topRated_data=allRestaurantsData.filter((res)=>
+            res.data.avgRating>4
         )
-        setRestro_data(topRated_data)
-        setIsTopRated((presTopRated)=>!presTopRated)
-        if(isTopRated){
-            setRestro_data(json)
+        setFilteredRestaurants(topRated_data)
+        setIsTopRated((prevTopRated)=>!prevTopRated)
+        if(!isTopRated){
+            setFilteredRestaurants(allRestaurantsData)
         }
         
     }
 
+
     function handleSearch(e){
         e.preventDefault();
-        console.log();
         const search_value=e.target.value.toLowerCase();
-        const search_filter_restrodata=restroData.filter(
-            (data)=>data.data.name.toLowerCase().includes(search_value));
-        search_filter_restrodata? setRestro_data(search_filter_restrodata) : setRestro_data(restroData)
-        
-
+        const search_filtered_restaurants=allRestaurantsData.filter(
+            (restaurant)=>(restaurant.data.name.toLowerCase().includes(search_value))
+            
+        )
+        setFilteredRestaurants(search_filtered_restaurants)
     }
 
-    return (restroData.length===0)? <Shimmer /> : (
+    return (allRestaurantsData.length===0)? <Shimmer /> : (
         <div className="body-container">
             <div className="filters">
                 <div className="toprated-btn-container">
                     <button className="toprated-btn" onClick={handleTopRated}>
-                        {isTopRated?"Show all Restaurants" : "Top Rated Restaurants"}
+                        {!isTopRated?"Show all Restaurants" : "Top Rated Restaurants"}
                     </button>
                 </div>
                 <div className="search">
