@@ -92,3 +92,7 @@ code {
   align-items: first baseline;
   gap: 30px;
 }
+a{
+  color: black;
+  text-decoration: none;
+}
