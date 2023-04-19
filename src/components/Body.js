@@ -1,11 +1,11 @@
 import RestroCards from "./RestroCard"
 import { useEffect, useState } from "react"
 import Shimmer from "./shimmer"
+import { Link } from "react-router-dom"
 export default function Body(){
     const [allRestaurantsData,setAllRestaurantsData]=useState([])
     const [filteredRestaurants, setFilteredRestaurants ]=useState([])
     const [isTopRated,setIsTopRated]=useState(true)
-    const card=filteredRestaurants?.map((data)=><RestroCards key={data.data.id} value={data} />)
     // console.log(restroData,"restro");
 
     useEffect(()=>{
@@ -59,9 +59,18 @@ export default function Body(){
                     <button className="search-btn">Search</button>
                 </div>
             </div>
+            {/* <Link>
             <div className="res-container">  
                 {card}
             </div>
+            </Link> */}
+            <div className="res-container">
+                {filteredRestaurants?.map((data)=>
+                <Link to={"/restaurants/"+data.data.id}>
+                    <RestroCards key={data.data.id} value={data} />
+                </Link>)}
+            </div>
+            
         </div>
     )
 }
