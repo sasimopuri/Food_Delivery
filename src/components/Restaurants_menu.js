@@ -15,6 +15,7 @@ const Restaurantsmenu=()=>{
             restro_menu+id
         )
         const data=await apiresult.json();
+        console.log(data);
         const result =  data?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card?.itemCards
         setRestaurantsMenu(result)
     }

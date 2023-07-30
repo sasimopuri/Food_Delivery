@@ -14,14 +14,16 @@ export default function Body(){
 
     async function getRestaurants(){
         const data = await fetch(
-            "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9304278&lng=77.678404&page_type=DESKTOP_WEB_LISTING"
-        );  
+            "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&page_type=DESKTOP_WEB_LISTING"
+          );
         const json= await data.json();
-        // console.log(json);
-        const json_data=json?.data?.cards[2]?.data?.data?.cards
-        setAllRestaurantsData(json_data)
-        setFilteredRestaurants(json_data)
-    }   
+        setAllRestaurantsData(
+            json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+          );
+        setFilteredRestaurants(
+            json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+        );
+    }
 
     function handleTopRated(){
         const topRated_data=allRestaurantsData.filter((res)=>
@@ -32,21 +34,23 @@ export default function Body(){
         if(!isTopRated){
             setFilteredRestaurants(allRestaurantsData)
         }
-        
     }
 
 
     function handleSearch(e){
         e.preventDefault();
         const search_value=e.target.value.toLowerCase();
-        const search_filtered_restaurants=allRestaurantsData.filter(
-            (restaurant)=>(restaurant.data.name.toLowerCase().includes(search_value))
-            
-        )
+        const search_filtered_restaurants=allRestaurantsData.filter((res) =>
+        res.info.name.toLowerCase().includes(search_value.toLowerCase())
+      );
         setFilteredRestaurants(search_filtered_restaurants)
     }
 
-    return (allRestaurantsData.length===0)? <Shimmer /> : (
+    if(filteredRestaurants===undefined){
+        console.log("nulll");
+    }
+
+    return (allRestaurantsData?.length===0)? <Shimmer /> : (
         <div className="body-container">
             <div className="filters">
                 <div className="toprated-btn-container">
@@ -66,9 +70,11 @@ export default function Body(){
             </Link> */}
             <div className="res-container">
                 {filteredRestaurants?.map((data)=>
-                <Link to={"/restaurants/"+data.data.id}>
-                    <RestroCards key={data.data.id} value={data} />
-                </Link>)}
+                <Link to={"/restaurants/"+data?.info.id}>
+                    <RestroCards key={data?.info.id} value={data} />
+                </Link>
+                )
+                }
             </div>
             
         </div>

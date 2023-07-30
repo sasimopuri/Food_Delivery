@@ -1,6 +1,6 @@
 import { restro_img } from "../utils/constants";
 export default function RestroCards(props){
-    const {cloudinaryImageId,name,cuisines,avgRating,deliveryTime,costForTwoString}=props.value?.data
+    const {cloudinaryImageId,name,cuisines,avgRating,deliveryTime,costForTwoString}=props.value?.info
     return(
         <>
             <div className="res-card">
