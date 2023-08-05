@@ -12,7 +12,7 @@ const Restaurant_Items_List=(props)=>{
                 <div className="text-sm font-light">{itemInfo?.description}</div>
             </div>
             <div className="relative">
-                <img className="w-32 border-0" src={restro_img+itemInfo?.imageId} alt="" />
+                <img className="w-40 border-0 rounded-md" src={restro_img+itemInfo?.imageId} alt="" />
                 <button className="absolute top-16 bg-gray-50 ml-4 rounded-sm shadow-sm shadow-gray-100 border border-gray-300 w-3/4 ">Add</button>
             </div>
         </div>
