@@ -23,7 +23,7 @@ const Restaurantsmenu = () => {
   console.log(categories);
   return (
     <>
-      <div className="w-6/12 flex items-center mx-auto flex-col">
+      <div className="w-7/12 flex items-center mx-auto flex-col">
         <h1 className="text-2xl my-5 font-bold">{name}</h1>
         <p className="text-base font-bold">
           {cuisines.join(", ")} - {costForTwoMessage}
