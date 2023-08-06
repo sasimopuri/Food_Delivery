@@ -21,7 +21,6 @@ const Restaurantsmenu = () => {
         res?.card?.card?.["@type"] ===
         "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
     );
-  console.log(categories);
   return (
     <>
       <div className="w-7/12 flex items-center mx-auto flex-col">
@@ -32,6 +31,7 @@ const Restaurantsmenu = () => {
         {categories.map((card, i) => (
           <RestaurantCategory
             data={card?.card}
+            key={card?.card?.card?.title}
             showMenuItems={showIndex === i ? true : false}
             setShowIndex={() => {
               showIndex === i ? setShowIndex(null) : setShowIndex(i);
