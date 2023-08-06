@@ -1,50 +1,50 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
 // import App from './App';
-import Body from './components/Body';
-import Header from './components/Header'
-import About from './components/About';
-import reportWebVitals from './reportWebVitals';
-import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
-import Restaurantsmenu from './components/Restaurants_menu';
+import Body from "./components/Body";
+import Header from "./components/Header";
+import About from "./components/About";
+import reportWebVitals from "./reportWebVitals";
+import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
+import Restaurantsmenu from "./components/Restaurants_menu";
+import { Provider } from "react-redux";
+import appStore from "./utils/appStore";
 
-const App=()=>{
-  return(
+const App = () => {
+  return (
     <>
-      <Header />
-      <Outlet />  
+      <Provider store={appStore}>
+        <Header />
+        <Outlet />
+      </Provider>
     </>
-  )
-}
+  );
+};
 
-
-const appRouter=createBrowserRouter([
+const appRouter = createBrowserRouter([
   {
-    path:"/",
-    element:<App />,
-    children:[
+    path: "/",
+    element: <App />,
+    children: [
       {
-        path:"/",
-        element:<Body />
+        path: "/",
+        element: <Body />,
       },
       {
-        path:"/about",
-        element:<About />
+        path: "/about",
+        element: <About />,
       },
       {
-        path:"/restaurants/:id",
-        element:<Restaurantsmenu />
-      }
-    ]
-  }
+        path: "/restaurants/:id",
+        element: <Restaurantsmenu />,
+      },
+    ],
+  },
+]);
 
-])
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <RouterProvider router={appRouter} />
-);
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<RouterProvider router={appRouter} />);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
